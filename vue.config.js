@@ -19,4 +19,4 @@ module.exports = {
   outputDir: "dist",
   // 部署应用包时的基本 URL
   publicPath: "/demo/"
-};
+}

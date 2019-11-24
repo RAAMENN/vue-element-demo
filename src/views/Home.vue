@@ -7,13 +7,13 @@
       时间：2019-11-12
     </p>
     <p><strong>【注意】</strong>面积单位默认为平方米，金额单位默认为元</p>
-    <h3>地价计算结果：{{ result }}元</h3>
-    <el-button plain size="mini" class="btn">开始计算</el-button>
+    <h2>地价计算结果：{{ result || "暂无" }}元</h2>
+    <el-button plain size="small" class="btn">开始计算</el-button>
     <el-row :gutter="10">
       <el-col :span="13">
         <table name="result" class="table-style">
           <tr>
-            <th colspan="4">标定地价系统查询结果</th>
+            <th colspan="4">输入：标定地价系统查询结果</th>
           </tr>
           <tr>
             <td>住宅</td>
@@ -25,9 +25,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.resident"
-                clearable
-                type="number"
+                v-model="form.stdLandInfo.residentialLandPrice"
                 :controls="false"
                 :min="0"
               ></el-input-number>
@@ -35,24 +33,24 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.business"
-                clearable
+                v-model="form.stdLandInfo.commercialLandPrice"
                 :controls="false"
+                :min="0"
               ></el-input-number>
             </td>
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.office"
-                clearable
+                v-model="form.stdLandInfo.officialLandPrice"
                 :controls="false"
+                :min="0"
               ></el-input-number>
             </td>
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.industry"
-                clearable
+                v-model="form.stdLandInfo.industrialLandPrice"
+                :min="0"
                 :controls="false"
               ></el-input-number>
             </td>
@@ -65,13 +63,31 @@
             <th colspan="3">产业发展导向/项目类型</th>
           </tr>
           <tr>
-            <td>战略型新兴产业</td>
-            <td>重点产业项目</td>
+            <el-tooltip
+              effect="dark"
+              placement="top-start"
+              content="战略性新兴产业（新一代信息技术、高端装备制造、绿色低碳、生物医药、数字经济、新材料、海洋经济等）、优势传统产业、生产性现代服务业"
+            >
+              <td>
+                战略型新兴产业
+              </td></el-tooltip
+            >
+            <el-tooltip
+              effect="dark"
+              placement="top-start"
+              content="产业项目分类以《深圳市工业及其它产业用地供应管理办法》（深府规【2019】4号）规定为准"
+            >
+              <td>重点产业项目</td>
+            </el-tooltip>
             <td>重点产业项目申请单位</td>
           </tr>
           <tr>
             <td>
-              <el-select size="mini" v-model="form.isNew" clearable>
+              <el-select
+                size="mini"
+                v-model="form.stdLandInfo.isEmergingIndustry"
+                clearable
+              >
                 <el-option
                   v-for="item in boolOptions"
                   :key="item.value"
@@ -81,7 +97,11 @@
               </el-select>
             </td>
             <td>
-              <el-select size="mini" v-model="form.isImportant" clearable>
+              <el-select
+                size="mini"
+                v-model="form.stdLandInfo.isKeyIndustry"
+                clearable
+              >
                 <el-option
                   v-for="item in boolOptions"
                   :key="item.value"
@@ -91,7 +111,11 @@
               </el-select>
             </td>
             <td>
-              <el-select size="mini" v-model="form.unit" clearable>
+              <el-select
+                size="mini"
+                v-model="form.stdLandInfo.keyIndustryUnit"
+                clearable
+              >
                 <el-option
                   v-for="item in unitOptions"
                   :key="item.value"
@@ -119,37 +143,11 @@
           </tr>
           <tr>
             <td>
-              <el-select size="mini" v-model="form.residentYear" clearable>
-                <el-option
-                  v-for="item in yearOptions"
-                  :key="item"
-                  :label="item"
-                  :value="item"
-                ></el-option>
-              </el-select>
-            </td>
-            <td>
-              <el-select size="mini" v-model="form.businessYear" clearable>
-                <el-option
-                  v-for="item in yearOptions"
-                  :key="item"
-                  :label="item"
-                  :value="item"
-                ></el-option>
-              </el-select>
-            </td>
-            <td>
-              <el-select size="mini" v-model="form.officeYear" clearable>
-                <el-option
-                  v-for="item in yearOptions"
-                  :key="item"
-                  :label="item"
-                  :value="item"
-                ></el-option>
-              </el-select>
-            </td>
-            <td>
-              <el-select size="mini" v-model="form.industryYear" clearable>
+              <el-select
+                size="mini"
+                v-model="form.stdLandInfo.residentialPeriod"
+                clearable
+              >
                 <el-option
                   v-for="item in yearOptions"
                   :key="item"
@@ -161,7 +159,49 @@
             <td>
               <el-select
                 size="mini"
-                v-model="form.industryResidentYear"
+                v-model="form.stdLandInfo.commercialPeriod"
+                clearable
+              >
+                <el-option
+                  v-for="item in yearOptions"
+                  :key="item"
+                  :label="item"
+                  :value="item"
+                ></el-option>
+              </el-select>
+            </td>
+            <td>
+              <el-select
+                size="mini"
+                v-model="form.stdLandInfo.officialPeriod"
+                clearable
+              >
+                <el-option
+                  v-for="item in yearOptions"
+                  :key="item"
+                  :label="item"
+                  :value="item"
+                ></el-option>
+              </el-select>
+            </td>
+            <td>
+              <el-select
+                size="mini"
+                v-model="form.stdLandInfo.industrialPeriod"
+                clearable
+              >
+                <el-option
+                  v-for="item in yearOptions"
+                  :key="item"
+                  :label="item"
+                  :value="item"
+                ></el-option>
+              </el-select>
+            </td>
+            <td>
+              <el-select
+                size="mini"
+                v-model="form.stdLandInfo.dormitoryPeriod"
                 clearable
               >
                 <el-option
@@ -180,7 +220,9 @@
       <el-col :span="24">
         <table name="details1" class="table-style">
           <tr>
-            <th colspan="10">各功能/产权形式建筑面积(产权归开发主体部分）</th>
+            <th colspan="10">
+              输入：各功能/产权形式建筑面积(产权归开发主体部分）
+            </th>
           </tr>
           <tr>
             <td rowspan="2"></td>
@@ -206,7 +248,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfWorkshop"
+                v-model="form.floorageInfoSelfHold.factoryBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -214,7 +256,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfWarehouse"
+                v-model="form.floorageInfoSelfHold.warehouse"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -222,7 +264,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfPublic"
+                v-model="form.floorageInfoSelfHold.municipalFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -230,7 +272,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfTransport"
+                v-model="form.floorageInfoSelfHold.transportationFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -238,7 +280,9 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfTransportDown"
+                v-model="
+                  form.floorageInfoSelfHold.transportationFacilityUnderground
+                "
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -246,7 +290,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfLogistic"
+                v-model="form.floorageInfoSelfHold.logisticsConstruction"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -254,7 +298,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfHouse"
+                v-model="form.floorageInfoSelfHold.ordinaryHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -262,7 +306,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfDorm"
+                v-model="form.floorageInfoSelfHold.dormitory"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -273,7 +317,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalWorkshop"
+                v-model="form.floorageInfoWholeSale.factoryBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -281,7 +325,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalWarehouse"
+                v-model="form.floorageInfoWholeSale.warehouse"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -289,7 +333,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalPublic"
+                v-model="form.floorageInfoWholeSale.municipalFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -297,7 +341,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalTransport"
+                v-model="form.floorageInfoWholeSale.transportationFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -305,7 +349,9 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalTransportDown"
+                v-model="
+                  form.floorageInfoWholeSale.transportationFacilityUnderground
+                "
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -313,7 +359,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalLogistic"
+                v-model="form.floorageInfoWholeSale.logisticsConstruction"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -321,7 +367,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalHouse"
+                v-model="form.floorageInfoWholeSale.ordinaryHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -329,7 +375,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalDorm"
+                v-model="form.floorageInfoWholeSale.dormitory"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -340,7 +386,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideWorkshop"
+                v-model="form.floorageInfoCarveUp.factoryBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -348,7 +394,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideWarehouse"
+                v-model="form.floorageInfoCarveUp.warehouse"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -356,7 +402,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.dividePublic"
+                v-model="form.floorageInfoCarveUp.municipalFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -364,7 +410,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideTransport"
+                v-model="form.floorageInfoCarveUp.transportationFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -372,7 +418,9 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideTransportDown"
+                v-model="
+                  form.floorageInfoCarveUp.transportationFacilityUnderground
+                "
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -380,7 +428,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideLogistic"
+                v-model="form.floorageInfoCarveUp.logisticsConstruction"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -388,7 +436,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideHouse"
+                v-model="form.floorageInfoCarveUp.ordinaryHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -396,7 +444,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideDorm"
+                v-model="form.floorageInfoCarveUp.dormitory"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -437,7 +485,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfTalented"
+                v-model="form.floorageInfoSelfHold.talentHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -445,7 +493,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfPublicRent"
+                v-model="form.floorageInfoSelfHold.publicRentalHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -453,7 +501,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfOffice"
+                v-model="form.floorageInfoSelfHold.office"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -461,7 +509,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfBusniessApt"
+                v-model="form.floorageInfoSelfHold.commercialHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -469,7 +517,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfHotel"
+                v-model="form.floorageInfoSelfHold.hotelBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -477,7 +525,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfCulture"
+                v-model="form.floorageInfoSelfHold.researchBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -485,7 +533,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfSport"
+                v-model="form.floorageInfoSelfHold.socialWelfareFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -493,18 +541,18 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfBusiness1"
+                v-model="form.floorageInfoSelfHold.commercialFirstFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
             </td>
           </tr>
           <tr>
-            <td>整售</td>
+            <td>整持</td>
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalTalented"
+                v-model="form.floorageInfoWholeSale.talentHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -512,7 +560,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalPublicRent"
+                v-model="form.floorageInfoWholeSale.publicRentalHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -520,7 +568,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalOffice"
+                v-model="form.floorageInfoWholeSale.office"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -528,7 +576,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalBusniessApt"
+                v-model="form.floorageInfoWholeSale.commercialHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -536,7 +584,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalHotel"
+                v-model="form.floorageInfoWholeSale.hotelBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -544,7 +592,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalCulture"
+                v-model="form.floorageInfoWholeSale.researchBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -552,7 +600,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalSport"
+                v-model="form.floorageInfoWholeSale.socialWelfareFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -560,7 +608,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalBusiness1"
+                v-model="form.floorageInfoWholeSale.commercialFirstFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -571,7 +619,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideTalented"
+                v-model="form.floorageInfoCarveUp.talentHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -579,7 +627,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.dividePublicRent"
+                v-model="form.floorageInfoCarveUp.publicRentalHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -587,7 +635,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideOffice"
+                v-model="form.floorageInfoCarveUp.office"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -595,7 +643,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideBusniessApt"
+                v-model="form.floorageInfoCarveUp.commercialHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -603,7 +651,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideHotel"
+                v-model="form.floorageInfoCarveUp.hotelBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -611,7 +659,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideCulture"
+                v-model="form.floorageInfoCarveUp.researchBuilding"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -619,7 +667,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideSport"
+                v-model="form.floorageInfoCarveUp.socialWelfareFacility"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -627,7 +675,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideBusiness1"
+                v-model="form.floorageInfoCarveUp.commercialFirstFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -662,7 +710,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfBusiness2"
+                v-model="form.floorageInfoSelfHold.commercialSecondFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -670,7 +718,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfBusiness3"
+                v-model="form.floorageInfoSelfHold.commercialThirdFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -678,7 +726,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfBusiness4"
+                v-model="form.floorageInfoSelfHold.commercialFourAboveFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -686,7 +734,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfBusinessUnder"
+                v-model="form.floorageInfoSelfHold.commercialUnderground"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -694,7 +742,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfGas"
+                v-model="form.floorageInfoSelfHold.gasStation"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -702,7 +750,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfAmusement"
+                v-model="form.floorageInfoSelfHold.amusementFacilities"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -710,7 +758,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfMarket"
+                v-model="form.floorageInfoSelfHold.foodMarket"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -718,7 +766,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.selfTotal"
+                v-model="selfTotal"
                 :controls="false"
                 disabled
               ></el-input-number>
@@ -729,7 +777,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalBusiness2"
+                v-model="form.floorageInfoWholeSale.commercialSecondFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -737,7 +785,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalBusiness3"
+                v-model="form.floorageInfoWholeSale.commercialThirdFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -745,7 +793,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalBusiness4"
+                v-model="form.floorageInfoWholeSale.commercialFourAboveFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -753,7 +801,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalBusinessUnder"
+                v-model="form.floorageInfoWholeSale.commercialUnderground"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -761,7 +809,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalGas"
+                v-model="form.floorageInfoWholeSale.gasStation"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -769,7 +817,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalAmusement"
+                v-model="form.floorageInfoWholeSale.amusementFacilities"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -777,7 +825,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalMarket"
+                v-model="form.floorageInfoWholeSale.foodMarket"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -785,7 +833,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.totalTotal"
+                v-model="wholeSaleTotal"
                 :controls="false"
                 disabled
               ></el-input-number>
@@ -796,7 +844,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideBusiness2"
+                v-model="form.floorageInfoCarveUp.commercialSecondFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -804,7 +852,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideBusiness3"
+                v-model="form.floorageInfoCarveUp.commercialThirdFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -812,7 +860,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideBusiness4"
+                v-model="form.floorageInfoCarveUp.commercialFourAboveFloor"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -820,7 +868,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideBusinessUnder"
+                v-model="form.floorageInfoCarveUp.commercialUnderground"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -828,7 +876,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideGas"
+                v-model="form.floorageInfoCarveUp.gasStation"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -836,7 +884,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideAmusement"
+                v-model="form.floorageInfoCarveUp.amusementFacilities"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -844,7 +892,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideMarket"
+                v-model="form.floorageInfoCarveUp.foodMarket"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -852,7 +900,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.divideTotal"
+                v-model="seprateTotal"
                 :controls="false"
                 disabled
               ></el-input-number>
@@ -878,7 +926,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.publicFree"
+                v-model="form.floorageInfoFree.municipalFacilityFree"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -886,7 +934,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.buildSquare"
+                v-model="form.floorageInfoFree.constructionLandArea"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -894,7 +942,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.protectFree"
+                v-model="form.floorageInfoFree.affordableHousingFree"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -902,7 +950,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.talentApt"
+                v-model="form.floorageInfoFree.talentHousingFree"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -910,7 +958,7 @@
             <td>
               <el-input-number
                 size="mini"
-                v-model="form.innovativeApt"
+                v-model="form.floorageInfoFree.innovativeIndustrialHousing"
                 :controls="false"
                 clearable
               ></el-input-number>
@@ -930,32 +978,291 @@ export default {
       result: 8000,
       // activeNames: ["1", "2", "3", "4"],
       form: {
-        resident: 0,
-        business: 0,
-        office: 0,
-        industry: 0,
-        isNew: "",
-        isImportant: "",
-        unit: "",
-        residentYear: "",
-        businessYear: "",
-        officeYear: "",
-        industryYear: "",
-        industryResidentYear: ""
+        stdLandInfo: {
+          residentialLandPrice: 4,
+          // --住宅（整数）
+          commercialLandPrice: 1,
+          // --商业（整数）
+          officialLandPrice: 3,
+          // --办公（整数）
+          industrialLandPrice: 2,
+          // --工业（整数）
+          isEmergingIndustry: "否",
+          // --是否战略新兴产业（字符串）
+          isKeyIndustry: "是",
+          // --是否重点产业项目（字符串）
+          keyIndustryUnit: "单一",
+          // --重点产业项目申请单位（字符串）
+          residentialPeriod: 70,
+          // --普通住房年期（整数）
+          commercialPeriod: 40,
+          // --商业年期（整数）
+          officialPeriod: 40,
+          // --办公年期（整数）
+          industrialPeriod: 50,
+          // --工业年期（整数）
+          dormitoryPeriod: 50
+        },
+        floorageInfoSelfHold: {
+          // --建筑面积-自持（对象，属性都为整数）
+          factoryBuilding: 109,
+          // --厂房（含新型产业用地中的厂房）
+          warehouse: 123,
+          // --仓库（含物流用地中的仓库）
+          municipalFacility: 114,
+          // --公用/市政设施及施工配套
+          transportationFacility: 121,
+          // --交通设施/综合管廊
+          transportationFacilityUnderground: 122,
+          // --交通设施/综合管廊地下
+          logisticsConstruction: 113,
+          // --研发用房/物流建筑
+          ordinaryHousing: 116,
+          // --普通商品房
+          dormitory: 108,
+          // --宿舍
+          talentHousing: 120,
+          // --人才住房
+          publicRentalHousing: 117,
+          // --公共租赁住房/安居型商品房
+          office: 115,
+          // --办公
+          commercialHousing: 104,
+          // --商务公寓
+          hotelBuilding: 112,
+          // --旅馆业建筑、会议中心
+          researchBuilding: 118,
+          // --文化、医疗、教育设施/科研用房
+          socialWelfareFacility: 119,
+          // --体育/社会福利设施/幼儿园/特殊建筑/社会停车场库/邮政网点/文化遗产/宗教建筑
+          commercialFirstFloor: 102,
+          // --商业首层
+          commercialSecondFloor: 105,
+          // --商业二层
+          commercialThirdFloor: 106,
+          // --商业三层
+          commercialFourAboveFloor: 103,
+          // --商业四层以上
+          commercialUnderground: 107,
+          // --商业地下
+          gasStation: 111,
+          // --加油站
+          amusementFacilities: 101,
+          // --游乐设施
+          foodMarket: 110
+          // --加气站、肉菜市场
+        },
+        floorageInfoWholeSale: {
+          // --建筑面积-整售（对象，属性都为整数）
+          factoryBuilding: 109,
+          // --厂房（含新型产业用地中的厂房）
+          warehouse: 123,
+          // --仓库（含物流用地中的仓库）
+          municipalFacility: 114,
+          // --公用/市政设施及施工配套
+          transportationFacility: 121,
+          // --交通设施/综合管廊
+          transportationFacilityUnderground: 122,
+          // --交通设施/综合管廊地下
+          logisticsConstruction: 113,
+          // --研发用房/物流建筑
+          ordinaryHousing: 116,
+          // --普通商品房
+          dormitory: 108,
+          // --宿舍
+          talentHousing: 120,
+          // --人才住房
+          publicRentalHousing: 117,
+          // --公共租赁住房/安居型商品房
+          office: 115,
+          // --办公
+          commercialHousing: 104,
+          // --商务公寓
+          hotelBuilding: 112,
+          // --旅馆业建筑、会议中心
+          researchBuilding: 118,
+          // --文化、医疗、教育设施/科研用房
+          socialWelfareFacility: 119,
+          // --体育/社会福利设施/幼儿园/特殊建筑/社会停车场库/邮政网点/文化遗产/宗教建筑
+          commercialFirstFloor: 102,
+          // --商业首层
+          commercialSecondFloor: 105,
+          // --商业二层
+          commercialThirdFloor: 106,
+          // --商业三层
+          commercialFourAboveFloor: 103,
+          // --商业四层以上
+          commercialUnderground: 107,
+          // --商业地下
+          gasStation: 111,
+          // --加油站
+          amusementFacilities: 101,
+          // --游乐设施
+          foodMarket: 112
+          // --加气站、肉菜市场
+        },
+        floorageInfoCarveUp: {
+          // --建筑面积-分割（对象，属性都为整数）
+          factoryBuilding: 109,
+          // --厂房（含新型产业用地中的厂房）
+          warehouse: 123,
+          // --仓库（含物流用地中的仓库）
+          municipalFacility: 114,
+          // --公用/市政设施及施工配套
+          transportationFacility: 121,
+          // --交通设施/综合管廊
+          transportationFacilityUnderground: 122,
+          // --交通设施/综合管廊地下
+          logisticsConstruction: 113,
+          // --研发用房/物流建筑
+          ordinaryHousing: 116,
+          // --普通商品房
+          dormitory: 108,
+          // --宿舍
+          talentHousing: 120,
+          // --人才住房
+          publicRentalHousing: 117,
+          // --公共租赁住房/安居型商品房
+          office: 115,
+          // --办公
+          commercialHousing: 104,
+          // --商务公寓
+          hotelBuilding: 112,
+          // --旅馆业建筑、会议中心
+          researchBuilding: 1180,
+          // --文化、医疗、教育设施/科研用房
+          socialWelfareFacility: 119,
+          // --体育/社会福利设施/幼儿园/特殊建筑/社会停车场库/邮政网点/文化遗产/宗教建筑
+          commercialFirstFloor: 102,
+          // --商业首层
+          commercialSecondFloor: 105,
+          // --商业二层
+          commercialThirdFloor: 106,
+          // --商业三层
+          commercialFourAboveFloor: 103,
+          // --商业四层以上
+          commercialUnderground: 107,
+          // --商业地下
+          gasStation: 111,
+          // --加油站
+          amusementFacilities: 101,
+          // --游乐设施
+          foodMarket: 110
+          // --加气站、肉菜市场
+        },
+        floorageInfoFree: {
+          // --建筑面积-免地价（对象，属性都为整数）
+          municipalFacilityFree: 44,
+          // --公共配套设施（免地价）
+          affordableHousingFree: 41,
+          // --保障房\人才住房
+          talentHousingFree: 45,
+          // --人才公寓
+          innovativeIndustrialHousing: 43,
+          // --创新型产业用房
+          constructionLandArea: 42
+          // --建筑用地面积
+        }
       },
-      boolOptions: [
-        { label: "是", value: true },
-        { label: "否", value: false }
-      ],
+      boolOptions: [{ label: "是", value: "是" }, { label: "否", value: "否" }],
       unitOptions: [
-        { label: "单一", value: "single" },
-        { label: "两个及以上", value: "double" }
+        { label: "单一", value: "单一" },
+        { label: "两个及以上", value: "两个及以上" }
       ],
       yearOptions: [30, 40, 50, 70]
     }
   },
   mounted() {},
-  methods: {}
+  methods: {},
+  computed: {
+    // 自持总和
+    selfTotal() {
+      const self = this.form.floorageInfoSelfHold
+      return (
+        self.factoryBuilding +
+        self.warehouse +
+        self.municipalFacility +
+        self.transportationFacility +
+        self.transportationFacilityUnderground +
+        self.logisticsConstruction +
+        self.ordinaryHousing +
+        self.dormitory +
+        self.talentHousing +
+        self.publicRentalHousing +
+        self.office +
+        self.commercialHousing +
+        self.hotelBuilding +
+        self.researchBuilding +
+        self.socialWelfareFacility +
+        self.commercialFirstFloor +
+        self.commercialSecondFloor +
+        self.commercialThirdFloor +
+        self.commercialFourAboveFloor +
+        self.commercialUnderground +
+        self.gasStation +
+        self.amusementFacilities +
+        self.foodMarket
+      )
+    },
+    // 整售总和
+    wholeSaleTotal() {
+      const wholesSale = this.form.floorageInfoWholeSale
+      return (
+        wholesSale.factoryBuilding +
+        wholesSale.warehouse +
+        wholesSale.municipalFacility +
+        wholesSale.transportationFacility +
+        wholesSale.transportationFacilityUnderground +
+        wholesSale.logisticsConstruction +
+        wholesSale.ordinaryHousing +
+        wholesSale.dormitory +
+        wholesSale.talentHousing +
+        wholesSale.publicRentalHousing +
+        wholesSale.office +
+        wholesSale.commercialHousing +
+        wholesSale.hotelBuilding +
+        wholesSale.researchBuilding +
+        wholesSale.socialWelfareFacility +
+        wholesSale.commercialFirstFloor +
+        wholesSale.commercialSecondFloor +
+        wholesSale.commercialThirdFloor +
+        wholesSale.commercialFourAboveFloor +
+        wholesSale.commercialUnderground +
+        wholesSale.gasStation +
+        wholesSale.amusementFacilities +
+        wholesSale.foodMarket
+      )
+    },
+    // 分割总和
+    seprateTotal() {
+      const seprate = this.form.floorageInfoCarveUp
+      return (
+        seprate.factoryBuilding +
+        seprate.warehouse +
+        seprate.municipalFacility +
+        seprate.transportationFacility +
+        seprate.transportationFacilityUnderground +
+        seprate.logisticsConstruction +
+        seprate.ordinaryHousing +
+        seprate.dormitory +
+        seprate.talentHousing +
+        seprate.publicRentalHousing +
+        seprate.office +
+        seprate.commercialHousing +
+        seprate.hotelBuilding +
+        seprate.researchBuilding +
+        seprate.socialWelfareFacility +
+        seprate.commercialFirstFloor +
+        seprate.commercialSecondFloor +
+        seprate.commercialThirdFloor +
+        seprate.commercialFourAboveFloor +
+        seprate.commercialUnderground +
+        seprate.gasStation +
+        seprate.amusementFacilities +
+        seprate.foodMarket
+      )
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -975,6 +1282,7 @@ export default {
     }
     td {
       width: 160px;
+      cursor: default;
     }
   }
 }

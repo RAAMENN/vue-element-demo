@@ -10,7 +10,8 @@ import {
   InputNumber,
   Row,
   Col,
-  Button
+  Button,
+  Tooltip
 } from "element-ui"
 
 Vue.config.productionTip = false
@@ -23,6 +24,7 @@ Vue.use(InputNumber)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Button)
+Vue.use(Tooltip)
 Vue.prototype.$message = Message
 new Vue({
   router,

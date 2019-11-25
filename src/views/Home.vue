@@ -92,7 +92,6 @@
               <el-select
                 size="mini"
                 v-model="form.stdLandInfo.isEmergingIndustry"
-                clearable
               >
                 <el-option
                   v-for="item in boolOptions"
@@ -103,11 +102,7 @@
               </el-select>
             </td>
             <td>
-              <el-select
-                size="mini"
-                v-model="form.stdLandInfo.isKeyIndustry"
-                clearable
-              >
+              <el-select size="mini" v-model="form.stdLandInfo.isKeyIndustry">
                 <el-option
                   v-for="item in boolOptions"
                   :key="item.value"
@@ -117,11 +112,7 @@
               </el-select>
             </td>
             <td>
-              <el-select
-                size="mini"
-                v-model="form.stdLandInfo.keyIndustryUnit"
-                clearable
-              >
+              <el-select size="mini" v-model="form.stdLandInfo.keyIndustryUnit">
                 <el-option
                   v-for="item in unitOptions"
                   :key="item.value"
@@ -152,7 +143,6 @@
               <el-select
                 size="mini"
                 v-model="form.stdLandInfo.residentialPeriod"
-                clearable
               >
                 <el-option
                   v-for="item in yearOptions"
@@ -166,7 +156,6 @@
               <el-select
                 size="mini"
                 v-model="form.stdLandInfo.commercialPeriod"
-                clearable
               >
                 <el-option
                   v-for="item in yearOptions"
@@ -177,11 +166,7 @@
               </el-select>
             </td>
             <td>
-              <el-select
-                size="mini"
-                v-model="form.stdLandInfo.officialPeriod"
-                clearable
-              >
+              <el-select size="mini" v-model="form.stdLandInfo.officialPeriod">
                 <el-option
                   v-for="item in yearOptions"
                   :key="item"
@@ -194,7 +179,6 @@
               <el-select
                 size="mini"
                 v-model="form.stdLandInfo.industrialPeriod"
-                clearable
               >
                 <el-option
                   v-for="item in yearOptions"
@@ -205,11 +189,7 @@
               </el-select>
             </td>
             <td>
-              <el-select
-                size="mini"
-                v-model="form.stdLandInfo.dormitoryPeriod"
-                clearable
-              >
+              <el-select size="mini" v-model="form.stdLandInfo.dormitoryPeriod">
                 <el-option
                   v-for="item in yearOptions"
                   :key="item"
@@ -256,7 +236,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.factoryBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -266,7 +245,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.warehouse"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -276,7 +254,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.municipalFacility"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -286,7 +263,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.transportationFacility"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -298,7 +274,6 @@
                   form.floorageInfoSelfHold.transportationFacilityUnderground
                 "
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -308,7 +283,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.logisticsConstruction"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -318,7 +292,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.ordinaryHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -328,7 +301,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.dormitory"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -341,7 +313,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.factoryBuilding"
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
             <td>
@@ -349,7 +320,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.warehouse"
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
             <td>
@@ -357,7 +327,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.municipalFacility"
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
             <td>
@@ -365,7 +334,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.transportationFacility"
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
             <td>
@@ -375,7 +343,6 @@
                   form.floorageInfoWholeSale.transportationFacilityUnderground
                 "
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
             <td>
@@ -383,7 +350,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.logisticsConstruction"
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
             <td>
@@ -391,7 +357,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.ordinaryHousing"
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
             <td>
@@ -399,7 +364,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.dormitory"
                 :controls="false"
-                clearable
               ></el-input-number>
             </td>
           </tr>
@@ -410,7 +374,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.factoryBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -420,7 +383,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.warehouse"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -430,7 +392,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.municipalFacility"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -440,7 +401,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.transportationFacility"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -452,7 +412,6 @@
                   form.floorageInfoCarveUp.transportationFacilityUnderground
                 "
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -462,7 +421,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.logisticsConstruction"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -472,7 +430,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.ordinaryHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -482,7 +439,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.dormitory"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -525,7 +481,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.talentHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -535,7 +490,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.publicRentalHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -545,7 +499,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.office"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -555,7 +508,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.commercialHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -565,7 +517,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.hotelBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -575,7 +526,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.researchBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -585,7 +535,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.socialWelfareFacility"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -595,7 +544,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.commercialFirstFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -608,7 +556,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.talentHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -618,7 +565,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.publicRentalHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -628,7 +574,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.office"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -638,7 +583,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.commercialHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -648,7 +592,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.hotelBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -658,7 +601,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.researchBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -668,7 +610,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.socialWelfareFacility"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -678,7 +619,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.commercialFirstFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -691,7 +631,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.talentHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -701,7 +640,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.publicRentalHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -711,7 +649,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.office"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -721,7 +658,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.commercialHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -731,7 +667,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.hotelBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -741,7 +676,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.researchBuilding"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -751,7 +685,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.socialWelfareFacility"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -761,7 +694,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.commercialFirstFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -798,7 +730,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.commercialSecondFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -808,7 +739,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.commercialThirdFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -818,7 +748,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.commercialFourAboveFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -828,7 +757,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.commercialUnderground"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -838,7 +766,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.gasStation"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -848,7 +775,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.amusementFacilities"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -858,7 +784,6 @@
                 size="mini"
                 v-model="form.floorageInfoSelfHold.foodMarket"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -881,7 +806,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.commercialSecondFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -891,7 +815,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.commercialThirdFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -901,7 +824,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.commercialFourAboveFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -911,7 +833,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.commercialUnderground"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -921,7 +842,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.gasStation"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -931,7 +851,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.amusementFacilities"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -941,7 +860,6 @@
                 size="mini"
                 v-model="form.floorageInfoWholeSale.foodMarket"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -964,7 +882,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.commercialSecondFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -974,7 +891,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.commercialThirdFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -984,7 +900,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.commercialFourAboveFloor"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -994,7 +909,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.commercialUnderground"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1004,7 +918,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.gasStation"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1014,7 +927,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.amusementFacilities"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1024,7 +936,6 @@
                 size="mini"
                 v-model="form.floorageInfoCarveUp.foodMarket"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1062,7 +973,6 @@
                 size="mini"
                 v-model="form.floorageInfoFree.municipalFacilityFree"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1072,7 +982,6 @@
                 size="mini"
                 v-model="form.floorageInfoFree.constructionLandArea"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1082,7 +991,6 @@
                 size="mini"
                 v-model="form.floorageInfoFree.affordableHousingFree"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1092,7 +1000,6 @@
                 size="mini"
                 v-model="form.floorageInfoFree.talentHousingFree"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1102,7 +1009,6 @@
                 size="mini"
                 v-model="form.floorageInfoFree.innovativeIndustrialHousing"
                 :controls="false"
-                clearable
                 :max="maxNum"
                 :min="minNum"
               ></el-input-number>
@@ -1120,20 +1026,20 @@ export default {
   name: "home",
   data() {
     return {
-      result: '',
+      result: 0,
       form: {
         stdLandInfo: {
-          residentialLandPrice: 4,
+          residentialLandPrice: 0,
           // --住宅（整数）
-          commercialLandPrice: 1,
+          commercialLandPrice: 0,
           // --商业（整数）
-          officialLandPrice: 3,
+          officialLandPrice: 0,
           // --办公（整数）
-          industrialLandPrice: 2,
+          industrialLandPrice: 0,
           // --工业（整数）
           isEmergingIndustry: "否",
           // --是否战略新兴产业（字符串）
-          isKeyIndustry: "是",
+          isKeyIndustry: "否",
           // --是否重点产业项目（字符串）
           keyIndustryUnit: "单一",
           // --重点产业项目申请单位（字符串）
@@ -1149,162 +1055,162 @@ export default {
         },
         floorageInfoSelfHold: {
           // --建筑面积-自持（对象，属性都为整数）
-          factoryBuilding: 109,
+          factoryBuilding: 0,
           // --厂房（含新型产业用地中的厂房）
-          warehouse: 123,
+          warehouse: 0,
           // --仓库（含物流用地中的仓库）
-          municipalFacility: 114,
+          municipalFacility: 0,
           // --公用/市政设施及施工配套
-          transportationFacility: 121,
+          transportationFacility: 0,
           // --交通设施/综合管廊
-          transportationFacilityUnderground: 122,
+          transportationFacilityUnderground: 0,
           // --交通设施/综合管廊地下
-          logisticsConstruction: 113,
+          logisticsConstruction: 0,
           // --研发用房/物流建筑
-          ordinaryHousing: 116,
+          ordinaryHousing: 0,
           // --普通商品房
-          dormitory: 108,
+          dormitory: 0,
           // --宿舍
-          talentHousing: 120,
+          talentHousing: 0,
           // --人才住房
-          publicRentalHousing: 117,
+          publicRentalHousing: 0,
           // --公共租赁住房/安居型商品房
-          office: 115,
+          office: 0,
           // --办公
-          commercialHousing: 104,
+          commercialHousing: 0,
           // --商务公寓
-          hotelBuilding: 112,
+          hotelBuilding: 0,
           // --旅馆业建筑、会议中心
-          researchBuilding: 118,
+          researchBuilding: 0,
           // --文化、医疗、教育设施/科研用房
-          socialWelfareFacility: 119,
+          socialWelfareFacility: 0,
           // --体育/社会福利设施/幼儿园/特殊建筑/社会停车场库/邮政网点/文化遗产/宗教建筑
-          commercialFirstFloor: 102,
+          commercialFirstFloor: 0,
           // --商业首层
-          commercialSecondFloor: 105,
+          commercialSecondFloor: 0,
           // --商业二层
-          commercialThirdFloor: 106,
+          commercialThirdFloor: 0,
           // --商业三层
-          commercialFourAboveFloor: 103,
+          commercialFourAboveFloor: 0,
           // --商业四层以上
-          commercialUnderground: 107,
+          commercialUnderground: 0,
           // --商业地下
-          gasStation: 111,
+          gasStation: 0,
           // --加油站
-          amusementFacilities: 101,
+          amusementFacilities: 0,
           // --游乐设施
-          foodMarket: 110
+          foodMarket: 0
           // --加气站、肉菜市场
         },
         floorageInfoWholeSale: {
           // --建筑面积-整售（对象，属性都为整数）
-          factoryBuilding: 109,
+          factoryBuilding: 0,
           // --厂房（含新型产业用地中的厂房）
-          warehouse: 123,
+          warehouse: 0,
           // --仓库（含物流用地中的仓库）
-          municipalFacility: 114,
+          municipalFacility: 0,
           // --公用/市政设施及施工配套
-          transportationFacility: 121,
+          transportationFacility: 0,
           // --交通设施/综合管廊
-          transportationFacilityUnderground: 122,
+          transportationFacilityUnderground: 0,
           // --交通设施/综合管廊地下
-          logisticsConstruction: 113,
+          logisticsConstruction: 0,
           // --研发用房/物流建筑
-          ordinaryHousing: 116,
+          ordinaryHousing: 0,
           // --普通商品房
-          dormitory: 108,
+          dormitory: 0,
           // --宿舍
-          talentHousing: 120,
+          talentHousing: 0,
           // --人才住房
-          publicRentalHousing: 117,
+          publicRentalHousing: 0,
           // --公共租赁住房/安居型商品房
-          office: 115,
+          office: 0,
           // --办公
-          commercialHousing: 104,
+          commercialHousing: 0,
           // --商务公寓
-          hotelBuilding: 112,
+          hotelBuilding: 0,
           // --旅馆业建筑、会议中心
-          researchBuilding: 118,
+          researchBuilding: 0,
           // --文化、医疗、教育设施/科研用房
-          socialWelfareFacility: 119,
+          socialWelfareFacility: 0,
           // --体育/社会福利设施/幼儿园/特殊建筑/社会停车场库/邮政网点/文化遗产/宗教建筑
-          commercialFirstFloor: 102,
+          commercialFirstFloor: 0,
           // --商业首层
-          commercialSecondFloor: 105,
+          commercialSecondFloor: 0,
           // --商业二层
-          commercialThirdFloor: 106,
+          commercialThirdFloor: 0,
           // --商业三层
-          commercialFourAboveFloor: 103,
+          commercialFourAboveFloor: 0,
           // --商业四层以上
-          commercialUnderground: 107,
+          commercialUnderground: 0,
           // --商业地下
-          gasStation: 111,
+          gasStation: 0,
           // --加油站
-          amusementFacilities: 101,
+          amusementFacilities: 0,
           // --游乐设施
-          foodMarket: 112
+          foodMarket: 0
           // --加气站、肉菜市场
         },
         floorageInfoCarveUp: {
           // --建筑面积-分割（对象，属性都为整数）
-          factoryBuilding: 109,
+          factoryBuilding: 0,
           // --厂房（含新型产业用地中的厂房）
-          warehouse: 123,
+          warehouse: 0,
           // --仓库（含物流用地中的仓库）
-          municipalFacility: 114,
+          municipalFacility: 0,
           // --公用/市政设施及施工配套
-          transportationFacility: 121,
+          transportationFacility: 0,
           // --交通设施/综合管廊
-          transportationFacilityUnderground: 122,
+          transportationFacilityUnderground: 0,
           // --交通设施/综合管廊地下
-          logisticsConstruction: 113,
+          logisticsConstruction: 0,
           // --研发用房/物流建筑
-          ordinaryHousing: 116,
+          ordinaryHousing: 0,
           // --普通商品房
-          dormitory: 108,
+          dormitory: 0,
           // --宿舍
-          talentHousing: 120,
+          talentHousing: 0,
           // --人才住房
-          publicRentalHousing: 117,
+          publicRentalHousing: 0,
           // --公共租赁住房/安居型商品房
-          office: 115,
+          office: 0,
           // --办公
-          commercialHousing: 104,
+          commercialHousing: 0,
           // --商务公寓
-          hotelBuilding: 112,
+          hotelBuilding: 0,
           // --旅馆业建筑、会议中心
-          researchBuilding: 1180,
+          researchBuilding: 0,
           // --文化、医疗、教育设施/科研用房
-          socialWelfareFacility: 119,
+          socialWelfareFacility: 0,
           // --体育/社会福利设施/幼儿园/特殊建筑/社会停车场库/邮政网点/文化遗产/宗教建筑
-          commercialFirstFloor: 102,
+          commercialFirstFloor: 0,
           // --商业首层
-          commercialSecondFloor: 105,
+          commercialSecondFloor: 0,
           // --商业二层
-          commercialThirdFloor: 106,
+          commercialThirdFloor: 0,
           // --商业三层
-          commercialFourAboveFloor: 103,
+          commercialFourAboveFloor: 0,
           // --商业四层以上
-          commercialUnderground: 107,
+          commercialUnderground: 0,
           // --商业地下
-          gasStation: 111,
+          gasStation: 0,
           // --加油站
-          amusementFacilities: 101,
+          amusementFacilities: 0,
           // --游乐设施
-          foodMarket: 110
+          foodMarket: 0
           // --加气站、肉菜市场
         },
         floorageInfoFree: {
           // --建筑面积-免地价（对象，属性都为整数）
-          municipalFacilityFree: 44,
+          municipalFacilityFree: 0,
           // --公共配套设施（免地价）
-          affordableHousingFree: 41,
+          affordableHousingFree: 0,
           // --保障房\人才住房
-          talentHousingFree: 45,
+          talentHousingFree: 0,
           // --人才公寓
-          innovativeIndustrialHousing: 43,
+          innovativeIndustrialHousing: 0,
           // --创新型产业用房
-          constructionLandArea: 42
+          constructionLandArea: 0
           // --建筑用地面积
         }
       },
@@ -1322,7 +1228,11 @@ export default {
   methods: {
     async postCalcHandler() {
       let res = await postCalcService.postCalc(this.form)
-      console.log(res)
+      if (res.data.code === 200) {
+        this.result = res.data.data.landPriceCalResult
+      } else {
+        this.$message.error(res.data.message)
+      }
     }
   },
   computed: {

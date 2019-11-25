@@ -8,7 +8,9 @@
     </p>
     <p><strong>【注意】</strong>面积单位默认为平方米，金额单位默认为元</p>
     <h2>地价计算结果：{{ result || "暂无" }}元</h2>
-    <el-button plain size="small" class="btn">开始计算</el-button>
+    <el-button plain size="small" class="btn" @click="postCalcHandler"
+      >开始计算</el-button
+    >
     <el-row :gutter="10">
       <el-col :span="13">
         <table name="result" class="table-style">
@@ -28,6 +30,7 @@
                 v-model="form.stdLandInfo.residentialLandPrice"
                 :controls="false"
                 :min="0"
+                :max="maxNum"
               ></el-input-number>
             </td>
             <td>
@@ -36,6 +39,7 @@
                 v-model="form.stdLandInfo.commercialLandPrice"
                 :controls="false"
                 :min="0"
+                :max="maxNum"
               ></el-input-number>
             </td>
             <td>
@@ -44,6 +48,7 @@
                 v-model="form.stdLandInfo.officialLandPrice"
                 :controls="false"
                 :min="0"
+                :max="maxNum"
               ></el-input-number>
             </td>
             <td>
@@ -51,6 +56,7 @@
                 size="mini"
                 v-model="form.stdLandInfo.industrialLandPrice"
                 :min="0"
+                :max="maxNum"
                 :controls="false"
               ></el-input-number>
             </td>
@@ -251,6 +257,8 @@
                 v-model="form.floorageInfoSelfHold.factoryBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -259,6 +267,8 @@
                 v-model="form.floorageInfoSelfHold.warehouse"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -267,6 +277,8 @@
                 v-model="form.floorageInfoSelfHold.municipalFacility"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -275,6 +287,8 @@
                 v-model="form.floorageInfoSelfHold.transportationFacility"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -285,6 +299,8 @@
                 "
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -293,6 +309,8 @@
                 v-model="form.floorageInfoSelfHold.logisticsConstruction"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -301,6 +319,8 @@
                 v-model="form.floorageInfoSelfHold.ordinaryHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -309,6 +329,8 @@
                 v-model="form.floorageInfoSelfHold.dormitory"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -389,6 +411,8 @@
                 v-model="form.floorageInfoCarveUp.factoryBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -397,6 +421,8 @@
                 v-model="form.floorageInfoCarveUp.warehouse"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -405,6 +431,8 @@
                 v-model="form.floorageInfoCarveUp.municipalFacility"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -413,6 +441,8 @@
                 v-model="form.floorageInfoCarveUp.transportationFacility"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -423,6 +453,8 @@
                 "
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -431,6 +463,8 @@
                 v-model="form.floorageInfoCarveUp.logisticsConstruction"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -439,6 +473,8 @@
                 v-model="form.floorageInfoCarveUp.ordinaryHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -447,6 +483,8 @@
                 v-model="form.floorageInfoCarveUp.dormitory"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -488,6 +526,8 @@
                 v-model="form.floorageInfoSelfHold.talentHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -496,6 +536,8 @@
                 v-model="form.floorageInfoSelfHold.publicRentalHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -504,6 +546,8 @@
                 v-model="form.floorageInfoSelfHold.office"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -512,6 +556,8 @@
                 v-model="form.floorageInfoSelfHold.commercialHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -520,6 +566,8 @@
                 v-model="form.floorageInfoSelfHold.hotelBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -528,6 +576,8 @@
                 v-model="form.floorageInfoSelfHold.researchBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -536,6 +586,8 @@
                 v-model="form.floorageInfoSelfHold.socialWelfareFacility"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -544,6 +596,8 @@
                 v-model="form.floorageInfoSelfHold.commercialFirstFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -555,6 +609,8 @@
                 v-model="form.floorageInfoWholeSale.talentHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -563,6 +619,8 @@
                 v-model="form.floorageInfoWholeSale.publicRentalHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -571,6 +629,8 @@
                 v-model="form.floorageInfoWholeSale.office"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -579,6 +639,8 @@
                 v-model="form.floorageInfoWholeSale.commercialHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -587,6 +649,8 @@
                 v-model="form.floorageInfoWholeSale.hotelBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -595,6 +659,8 @@
                 v-model="form.floorageInfoWholeSale.researchBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -603,6 +669,8 @@
                 v-model="form.floorageInfoWholeSale.socialWelfareFacility"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -611,6 +679,8 @@
                 v-model="form.floorageInfoWholeSale.commercialFirstFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -622,6 +692,8 @@
                 v-model="form.floorageInfoCarveUp.talentHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -630,6 +702,8 @@
                 v-model="form.floorageInfoCarveUp.publicRentalHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -638,6 +712,8 @@
                 v-model="form.floorageInfoCarveUp.office"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -646,6 +722,8 @@
                 v-model="form.floorageInfoCarveUp.commercialHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -654,6 +732,8 @@
                 v-model="form.floorageInfoCarveUp.hotelBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -662,6 +742,8 @@
                 v-model="form.floorageInfoCarveUp.researchBuilding"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -670,6 +752,8 @@
                 v-model="form.floorageInfoCarveUp.socialWelfareFacility"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -678,6 +762,8 @@
                 v-model="form.floorageInfoCarveUp.commercialFirstFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -713,6 +799,8 @@
                 v-model="form.floorageInfoSelfHold.commercialSecondFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -721,6 +809,8 @@
                 v-model="form.floorageInfoSelfHold.commercialThirdFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -729,6 +819,8 @@
                 v-model="form.floorageInfoSelfHold.commercialFourAboveFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -737,6 +829,8 @@
                 v-model="form.floorageInfoSelfHold.commercialUnderground"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -745,6 +839,8 @@
                 v-model="form.floorageInfoSelfHold.gasStation"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -753,6 +849,8 @@
                 v-model="form.floorageInfoSelfHold.amusementFacilities"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -761,6 +859,8 @@
                 v-model="form.floorageInfoSelfHold.foodMarket"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -769,6 +869,8 @@
                 v-model="selfTotal"
                 :controls="false"
                 disabled
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -780,6 +882,8 @@
                 v-model="form.floorageInfoWholeSale.commercialSecondFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -788,6 +892,8 @@
                 v-model="form.floorageInfoWholeSale.commercialThirdFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -796,6 +902,8 @@
                 v-model="form.floorageInfoWholeSale.commercialFourAboveFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -804,6 +912,8 @@
                 v-model="form.floorageInfoWholeSale.commercialUnderground"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -812,6 +922,8 @@
                 v-model="form.floorageInfoWholeSale.gasStation"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -820,6 +932,8 @@
                 v-model="form.floorageInfoWholeSale.amusementFacilities"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -828,6 +942,8 @@
                 v-model="form.floorageInfoWholeSale.foodMarket"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -836,6 +952,8 @@
                 v-model="wholeSaleTotal"
                 :controls="false"
                 disabled
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -847,6 +965,8 @@
                 v-model="form.floorageInfoCarveUp.commercialSecondFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -855,6 +975,8 @@
                 v-model="form.floorageInfoCarveUp.commercialThirdFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -863,6 +985,8 @@
                 v-model="form.floorageInfoCarveUp.commercialFourAboveFloor"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -871,6 +995,8 @@
                 v-model="form.floorageInfoCarveUp.commercialUnderground"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -879,6 +1005,8 @@
                 v-model="form.floorageInfoCarveUp.gasStation"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -887,6 +1015,8 @@
                 v-model="form.floorageInfoCarveUp.amusementFacilities"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -895,6 +1025,8 @@
                 v-model="form.floorageInfoCarveUp.foodMarket"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -903,6 +1035,8 @@
                 v-model="seprateTotal"
                 :controls="false"
                 disabled
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -929,6 +1063,8 @@
                 v-model="form.floorageInfoFree.municipalFacilityFree"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -937,6 +1073,8 @@
                 v-model="form.floorageInfoFree.constructionLandArea"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -945,6 +1083,8 @@
                 v-model="form.floorageInfoFree.affordableHousingFree"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -953,6 +1093,8 @@
                 v-model="form.floorageInfoFree.talentHousingFree"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
             <td>
@@ -961,6 +1103,8 @@
                 v-model="form.floorageInfoFree.innovativeIndustrialHousing"
                 :controls="false"
                 clearable
+                :max="maxNum"
+                :min="minNum"
               ></el-input-number>
             </td>
           </tr>
@@ -971,12 +1115,12 @@
 </template>
 
 <script>
+import postCalcService from "@/assets/services/postCalcService"
 export default {
   name: "home",
   data() {
     return {
-      result: 8000,
-      // activeNames: ["1", "2", "3", "4"],
+      result: '',
       form: {
         stdLandInfo: {
           residentialLandPrice: 4,
@@ -1169,98 +1313,120 @@ export default {
         { label: "单一", value: "单一" },
         { label: "两个及以上", value: "两个及以上" }
       ],
-      yearOptions: [30, 40, 50, 70]
+      yearOptions: [30, 40, 50, 70],
+      maxNum: 99999999,
+      minNum: 0
     }
   },
   mounted() {},
-  methods: {},
+  methods: {
+    async postCalcHandler() {
+      let res = await postCalcService.postCalc(this.form)
+      console.log(res)
+    }
+  },
   computed: {
     // 自持总和
-    selfTotal() {
-      const self = this.form.floorageInfoSelfHold
-      return (
-        self.factoryBuilding +
-        self.warehouse +
-        self.municipalFacility +
-        self.transportationFacility +
-        self.transportationFacilityUnderground +
-        self.logisticsConstruction +
-        self.ordinaryHousing +
-        self.dormitory +
-        self.talentHousing +
-        self.publicRentalHousing +
-        self.office +
-        self.commercialHousing +
-        self.hotelBuilding +
-        self.researchBuilding +
-        self.socialWelfareFacility +
-        self.commercialFirstFloor +
-        self.commercialSecondFloor +
-        self.commercialThirdFloor +
-        self.commercialFourAboveFloor +
-        self.commercialUnderground +
-        self.gasStation +
-        self.amusementFacilities +
-        self.foodMarket
-      )
+    selfTotal: {
+      get() {
+        const self = this.form.floorageInfoSelfHold
+        return (
+          self.factoryBuilding +
+          self.warehouse +
+          self.municipalFacility +
+          self.transportationFacility +
+          self.transportationFacilityUnderground +
+          self.logisticsConstruction +
+          self.ordinaryHousing +
+          self.dormitory +
+          self.talentHousing +
+          self.publicRentalHousing +
+          self.office +
+          self.commercialHousing +
+          self.hotelBuilding +
+          self.researchBuilding +
+          self.socialWelfareFacility +
+          self.commercialFirstFloor +
+          self.commercialSecondFloor +
+          self.commercialThirdFloor +
+          self.commercialFourAboveFloor +
+          self.commercialUnderground +
+          self.gasStation +
+          self.amusementFacilities +
+          self.foodMarket
+        )
+      },
+      set(val) {
+        return val
+      }
     },
     // 整售总和
-    wholeSaleTotal() {
-      const wholesSale = this.form.floorageInfoWholeSale
-      return (
-        wholesSale.factoryBuilding +
-        wholesSale.warehouse +
-        wholesSale.municipalFacility +
-        wholesSale.transportationFacility +
-        wholesSale.transportationFacilityUnderground +
-        wholesSale.logisticsConstruction +
-        wholesSale.ordinaryHousing +
-        wholesSale.dormitory +
-        wholesSale.talentHousing +
-        wholesSale.publicRentalHousing +
-        wholesSale.office +
-        wholesSale.commercialHousing +
-        wholesSale.hotelBuilding +
-        wholesSale.researchBuilding +
-        wholesSale.socialWelfareFacility +
-        wholesSale.commercialFirstFloor +
-        wholesSale.commercialSecondFloor +
-        wholesSale.commercialThirdFloor +
-        wholesSale.commercialFourAboveFloor +
-        wholesSale.commercialUnderground +
-        wholesSale.gasStation +
-        wholesSale.amusementFacilities +
-        wholesSale.foodMarket
-      )
+    wholeSaleTotal: {
+      get() {
+        const wholesSale = this.form.floorageInfoWholeSale
+        return (
+          wholesSale.factoryBuilding +
+          wholesSale.warehouse +
+          wholesSale.municipalFacility +
+          wholesSale.transportationFacility +
+          wholesSale.transportationFacilityUnderground +
+          wholesSale.logisticsConstruction +
+          wholesSale.ordinaryHousing +
+          wholesSale.dormitory +
+          wholesSale.talentHousing +
+          wholesSale.publicRentalHousing +
+          wholesSale.office +
+          wholesSale.commercialHousing +
+          wholesSale.hotelBuilding +
+          wholesSale.researchBuilding +
+          wholesSale.socialWelfareFacility +
+          wholesSale.commercialFirstFloor +
+          wholesSale.commercialSecondFloor +
+          wholesSale.commercialThirdFloor +
+          wholesSale.commercialFourAboveFloor +
+          wholesSale.commercialUnderground +
+          wholesSale.gasStation +
+          wholesSale.amusementFacilities +
+          wholesSale.foodMarket
+        )
+      },
+      set(val) {
+        return val
+      }
     },
     // 分割总和
-    seprateTotal() {
-      const seprate = this.form.floorageInfoCarveUp
-      return (
-        seprate.factoryBuilding +
-        seprate.warehouse +
-        seprate.municipalFacility +
-        seprate.transportationFacility +
-        seprate.transportationFacilityUnderground +
-        seprate.logisticsConstruction +
-        seprate.ordinaryHousing +
-        seprate.dormitory +
-        seprate.talentHousing +
-        seprate.publicRentalHousing +
-        seprate.office +
-        seprate.commercialHousing +
-        seprate.hotelBuilding +
-        seprate.researchBuilding +
-        seprate.socialWelfareFacility +
-        seprate.commercialFirstFloor +
-        seprate.commercialSecondFloor +
-        seprate.commercialThirdFloor +
-        seprate.commercialFourAboveFloor +
-        seprate.commercialUnderground +
-        seprate.gasStation +
-        seprate.amusementFacilities +
-        seprate.foodMarket
-      )
+    seprateTotal: {
+      get() {
+        const seprate = this.form.floorageInfoCarveUp
+        return (
+          seprate.factoryBuilding +
+          seprate.warehouse +
+          seprate.municipalFacility +
+          seprate.transportationFacility +
+          seprate.transportationFacilityUnderground +
+          seprate.logisticsConstruction +
+          seprate.ordinaryHousing +
+          seprate.dormitory +
+          seprate.talentHousing +
+          seprate.publicRentalHousing +
+          seprate.office +
+          seprate.commercialHousing +
+          seprate.hotelBuilding +
+          seprate.researchBuilding +
+          seprate.socialWelfareFacility +
+          seprate.commercialFirstFloor +
+          seprate.commercialSecondFloor +
+          seprate.commercialThirdFloor +
+          seprate.commercialFourAboveFloor +
+          seprate.commercialUnderground +
+          seprate.gasStation +
+          seprate.amusementFacilities +
+          seprate.foodMarket
+        )
+      },
+      set(val) {
+        return val
+      }
     }
   }
 }

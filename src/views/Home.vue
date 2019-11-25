@@ -1230,6 +1230,7 @@ export default {
       let res = await postCalcService.postCalc(this.form)
       if (res.data.code === 200) {
         this.result = res.data.data.landPriceCalResult
+        this.$message.success('计算成功')
       } else {
         this.$message.error(res.data.message)
       }

@@ -13,7 +13,7 @@ module.exports = {
       // },
       "/": {
         // 服务器
-        target: "http://47.97.96.195:8080",
+        target: "http://47.97.96.195:80",
         changeOrigin: true,
         ws: false
       }

@@ -12,7 +12,9 @@ import {
   Row,
   Col,
   Button,
-  Tooltip
+  Tooltip,
+  Loading,
+  Icon
 } from "element-ui"
 
 Vue.config.productionTip = false
@@ -26,6 +28,8 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Button)
 Vue.use(Tooltip)
+Vue.use(Loading)
+Vue.use(Icon)
 Vue.prototype.$message = Message
 window.onload = function() {
   initPublicParams()

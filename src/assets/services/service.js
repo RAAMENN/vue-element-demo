@@ -44,7 +44,7 @@ function httpService(service, contentType) {
  * @param {接口地址} baseUrl
  * @param {请求头部参数} headers
  */
-function createService(axiosConfig = {}, baseUrl = "", headers = {}) {
+function createService(axiosConfig = {}, baseUrl = "/api", headers = {}) {
   let params = {
     baseURL: baseUrl,
     timeout: 60000,

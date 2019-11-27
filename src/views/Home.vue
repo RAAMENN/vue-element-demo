@@ -1,5 +1,11 @@
 <template>
-  <div class="home">
+  <div
+    class="home"
+    v-loading.fullscreen.lock="isLoading"
+    element-loading-text="计算中"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+    element-loading-spinner="el-icon-loading"
+  >
     <h1>招拍挂类地价计算器（V2.3）</h1>
     <p style="textAlign: left">
       <strong>【免责声明】</strong
@@ -1221,18 +1227,22 @@ export default {
       ],
       yearOptions: [30, 40, 50, 70],
       maxNum: 99999999,
-      minNum: 0
+      minNum: 0,
+      isLoading: false
     }
   },
   mounted() {},
   methods: {
     async postCalcHandler() {
+      this.isLoading = true
       let res = await postCalcService.postCalc(this.form)
       if (res.data.code === 200) {
         this.result = res.data.data.landPriceCalResult
-        this.$message.success('计算成功')
+        this.isLoading = false
+        this.$message.success("计算成功")
       } else {
         this.$message.error(res.data.message)
+        this.isLoading = false
       }
     }
   },

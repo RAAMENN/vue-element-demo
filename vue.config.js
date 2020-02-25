@@ -1,3 +1,7 @@
+const backEndServer = {
+  服务器1: "http://oiayiyi.top"
+  // '模拟环境': 'http://localhost:11041''
+}
 module.exports = {
   // webpack-dev-server 相关配置
   devServer: {
@@ -5,15 +9,9 @@ module.exports = {
     port: 8080,
     open: true,
     proxy: {
-      // "/": {
-      //   // mock服务器
-      //   target: "http://localhost:11041",
-      //   changeOrigin: true,
-      //   ws: false
-      // },
       "/": {
         // 服务器
-        target: "http://oiayiyi.top",
+        target: Object.values(backEndServer)[0],
         changeOrigin: true,
         ws: false
       }

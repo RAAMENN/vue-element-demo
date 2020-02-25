@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BASE_URL } from "@/assets/consts/urls"
+// import { BASE_URL } from "@/assets/consts/urls"
 
 let services
 let uploadServices
@@ -44,7 +44,7 @@ function httpService(service, contentType) {
  * @param {接口地址} baseUrl
  * @param {请求头部参数} headers
  */
-function createService(axiosConfig = {}, baseUrl = BASE_URL, headers = {}) {
+function createService(axiosConfig = {}, baseUrl = "/api", headers = {}) {
   let params = {
     baseURL: baseUrl,
     timeout: 60000,

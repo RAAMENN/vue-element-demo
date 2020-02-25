@@ -1,4 +1,4 @@
-# vue-element-demo
+# land-calculator
 
 ## Project setup
 ```

@@ -1,11 +1,7 @@
 <template>
   <div class="carousel">
-    <el-carousel :interval="4000" height="600px">
-      <el-carousel-item v-for="(item, idx) in picList" :key="idx">
-        <el-image style="width: 500px" :src="item[0]" :fit="fit"></el-image>
-        <el-image style="width: 500px" :src="item[1]" :fit="fit"></el-image>
-      </el-carousel-item>
-    </el-carousel>
+    <el-image style="width: 500px" :src="currentPic[0]"></el-image>
+    <el-image style="width: 500px" :src="currentPic[1]"></el-image>
   </div>
 </template>
 
@@ -46,11 +42,35 @@ export default {
         [pic7, picB7],
         [pic8, picB8],
         [pic9, picB9]
-      ]
+      ],
+      currentPic: [pic, picB],
+      index: 0
     }
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.changePic()
+  },
+  watch: {
+    index(val) {
+      if (val == 9) {
+        this.index = 0
+      }
+    }
+  },
+  methods: {
+    changePic() {
+      setInterval(() => {
+        this.currentPic = this.picList[this.index]
+        this.index += 1
+      }, 3000)
+    }
+  }
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+</style>

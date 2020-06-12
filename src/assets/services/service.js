@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 // import { BASE_URL } from "@/assets/consts/urls"
 
 let services
@@ -9,7 +9,7 @@ let publicParams = {}
 function httpService(service, contentType) {
   service.interceptors.request.use(
     request => {
-      if (request.method === "get") {
+      if (request.method === 'get') {
         request.params = {
           // 公用参数
           ...publicParams,
@@ -19,8 +19,8 @@ function httpService(service, contentType) {
         }
       }
       if (
-        request.method === "post" &&
-        contentType !== "multipart/form-data;charset=UTF-8"
+        request.method === 'post' &&
+        contentType !== 'multipart/form-data;charset=UTF-8'
       ) {
         request.data = {
           // 公用参数
@@ -33,7 +33,7 @@ function httpService(service, contentType) {
       return request
     },
     error => {
-      console.error("Request Error: " + error)
+      console.error('Request Error: ' + error)
       return Promise.reject(error)
     }
   )
@@ -44,19 +44,19 @@ function httpService(service, contentType) {
  * @param {接口地址} baseUrl
  * @param {请求头部参数} headers
  */
-function createService(axiosConfig = {}, baseUrl = "/api", headers = {}) {
+function createService(axiosConfig = {}, baseUrl = '/api', headers = {}) {
   let params = {
     baseURL: baseUrl,
     timeout: 60000,
     header: {
-      ["X-Requested-With"]: "XMLHttpRequest",
+      ['X-Requested-With']: 'XMLHttpRequest',
       ...publicParams,
       ...headers
     },
     ...axiosConfig
   }
   const service = axios.create(params)
-  httpService(service, headers["Content-Type"])
+  httpService(service, headers['Content-Type'])
   return service
 }
 /**
@@ -64,8 +64,8 @@ function createService(axiosConfig = {}, baseUrl = "/api", headers = {}) {
  * @param {接口需要传递的公用参数} params
  */
 function initPublicParams(params = {}) {
-  if (process.env.NODE_ENV === "development") {
-    let paramsInStorage = localStorage.getItem("accountParams")
+  if (process.env.NODE_ENV === 'development') {
+    let paramsInStorage = localStorage.getItem('accountParams')
     if (paramsInStorage) {
       params = JSON.parse(paramsInStorage)
     }
@@ -73,9 +73,9 @@ function initPublicParams(params = {}) {
   publicParams = params
   services = createService()
   uploadServices = createService({}, undefined, {
-    "Content-Type": "multipart/form-data;charset=UTF-8"
+    'Content-Type': 'multipart/form-data;charset=UTF-8'
   })
-  downloadServices = createService({ responseType: "blob" })
+  downloadServices = createService({ responseType: 'blob' })
 }
 /**
  *
@@ -83,7 +83,7 @@ function initPublicParams(params = {}) {
  */
 function downloadServicesWithProgress(payload) {
   return createService({
-    responseType: "blob",
+    responseType: 'blob',
     ...payload
   })
 }
